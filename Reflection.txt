@@ -1,0 +1,13 @@
+1. Describe the effect each of the P, I, D components had in your implementation.
+	The P term is proportional to the current error. By only using this term, the controll will overshot.
+	The I term is the integral term, which account for the accumulative error in the past. This term will correct the systematic bias.
+	The D term is the differential term, which estimate the future error trend based on the current rate of change. The more rapid the change, the greater this term should be.
+
+
+2. Describe how the final hyperparameters were chosen.
+	Set all gains to zero.
+	Increase the P gain until the response to a disturbance is steady oscillation.
+	Increase the D gain until the the oscillations go away (i.e. it's critically damped).
+	Repeat the previous 2 steps until increasing the D gain does not stop the oscillations.
+	Set P and D to the last stable values.
+	Increase the I gain until it brings you to the setpoint with the number of oscillations desired (normally zero but a quicker response can be had if you don't mind a couple oscillations of overshoot)
